@@ -16,7 +16,7 @@
   <p id="msg"></p>
 
   <script>
-  document.getElementById("done").addEventListener("click", () => {
+  document.getElementById("done").addEventListener("click", async () => {
     const data = {
       helper_id: "H001",
       client_id: "C001",
@@ -24,9 +24,15 @@
       completed_at: new Date().toISOString()
     };
 
-    console.log("送信予定データ:", data);
+    const res = await fetch("https://jolly-firefly-3420.systemcraft-lab.workers.dev", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+
+    const json = await res.json();
     document.getElementById("msg").textContent =
-      "完了データを作成しました（まだ送信していません）";
+      "送信OK：" + JSON.stringify(json);
   });
   </script>
 
