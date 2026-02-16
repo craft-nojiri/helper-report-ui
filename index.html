@@ -16,9 +16,19 @@
   <p id="msg"></p>
 
   <script>
-    document.getElementById("done").addEventListener("click", () => {
-      document.getElementById("msg").textContent = "押されました（まだ送信はしません）";
-    });
+  document.getElementById("done").addEventListener("click", () => {
+    const data = {
+      helper_id: "H001",
+      client_id: "C001",
+      service_code: "VISIT_CARE",
+      completed_at: new Date().toISOString()
+    };
+
+    console.log("送信予定データ:", data);
+    document.getElementById("msg").textContent =
+      "完了データを作成しました（まだ送信していません）";
+  });
   </script>
+
 </body>
 </html>
