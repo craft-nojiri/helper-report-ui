@@ -17,6 +17,9 @@
 
   <script>
   document.getElementById("done").addEventListener("click", async () => {
+    const msg = document.getElementById("msg");
+    msg.textContent = "送信中...";
+
     const data = {
       helper_id: "H001",
       client_id: "C001",
@@ -24,15 +27,18 @@
       completed_at: new Date().toISOString()
     };
 
-    const res = await fetch("https://jolly-firefly-3420.systemcraft-lab.workers.dev", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
+    try {
+      const res = await fetch("https://jolly-firefly-3420.systemcraft-lab.workers.dev", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
 
-    const json = await res.json();
-    document.getElementById("msg").textContent =
-      "送信OK：" + JSON.stringify(json);
+      const text = await res.text(); // まずテキストで受ける（失敗も見える）
+      msg.textContent = `status=${res.status} body=${text}`;
+    } catch (e) {
+      msg.textContent = "送信エラー: " + e;
+    }
   });
   </script>
 
