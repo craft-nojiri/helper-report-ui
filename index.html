@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>完了報告</title>
+  <style>
+    body { font-family: system-ui; padding: 24px; }
+    button { font-size: 20px; padding: 16px 20px; width: 100%; }
+  </style>
+</head>
+<body>
+  <h1>完了報告</h1>
+  <button id="done">完了</button>
+
+  <p id="msg"></p>
+
+  <script>
+    document.getElementById("done").addEventListener("click", () => {
+      document.getElementById("msg").textContent = "押されました（まだ送信はしません）";
+    });
+  </script>
+</body>
+</html>
